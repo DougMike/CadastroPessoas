@@ -1,0 +1,20 @@
+<div class="container-fluid">
+    <h2>Cadastro de pessoas</h2>
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a [ngClass]="lista ? 'nav-link active' : 'nav-link'" (click)="showLista()">Lista de pessoas</a>
+        </li>
+        <li class="nav-item">
+            <a [ngClass]="adicionar ? 'nav-link active' : 'nav-link'" (click)="showAdicionar()">Adicionar Pessoa</a>
+        </li>
+    </ul>
+
+    <div class="container-fluid">
+        <div *ngIf="lista">
+            <app-lista-pessoas></app-lista-pessoas>
+        </div>
+        <div *ngIf="adicionar">
+            <app-adicionar-pessoa></app-adicionar-pessoa>
+        </div>
+    </div>
+</div>
