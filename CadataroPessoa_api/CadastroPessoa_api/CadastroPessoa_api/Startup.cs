@@ -31,6 +31,7 @@ namespace CadastroPessoa_api
             services.AddScoped<IPessoaService, PessoaService>();
             services.AddScoped<IPessoaRepository, PessoaRepository>();
             services.AddControllers();
+            services.AddCors();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CadastroPessoa_api", Version = "v1" });
@@ -53,6 +54,10 @@ namespace CadastroPessoa_api
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseCors(cors => cors.AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowAnyOrigin()
+            );
 
             app.UseEndpoints(endpoints =>
             {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Pessoa } from 'src/app/models/pessoa';
+import { RequestService } from 'src/app/services/request.service';
 
 @Component({
   selector: 'app-lista-pessoas',
@@ -8,21 +9,16 @@ import { Pessoa } from 'src/app/models/pessoa';
 })
 export class ListaPessoasComponent implements OnInit {
 
-  lista: Pessoa[] = [{
-    nome: 'teste',
-    sobrenome: 'teste',
-    cidade: 'tetse',
-    cep: 'teste',
-    email: 'teste',
-    estado: 'teste',
-    logradouro: 'teste',
-    nacionalidade: 'teste',
-    telefone: 'teste',
-  }];
+  lista: Pessoa[];
 
-  constructor() { }
+  constructor(private request: RequestService) { }
 
   ngOnInit(): void {
+    this.getLista();
+  }
+
+  async getLista(){
+    this.lista = await this.request.getList();
   }
 
 }

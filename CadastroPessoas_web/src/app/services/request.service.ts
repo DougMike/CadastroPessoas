@@ -12,10 +12,12 @@ export class RequestService {
   constructor(private http: HttpClient) { }
 
   getList() {
-    this.http.get<Pessoa[]>(environment.apiUrl)
+    this.http.get<Pessoa[]>(environment.apiUrl + 'Pessoas')
       .subscribe({
         next: res => this.data = res,
         error: res => console.log(res)
       })
+      console.log(this.data)
+      return this.data;
   }
 }
