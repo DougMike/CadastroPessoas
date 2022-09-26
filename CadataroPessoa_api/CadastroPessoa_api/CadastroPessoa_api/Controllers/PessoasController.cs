@@ -21,7 +21,8 @@ namespace CadastroPessoa_api.Controllers
         [HttpGet]
         public IEnumerable<Pessoa> GetAll()
         {
-            return _pessoaService.GetAll();
+            var teste = _pessoaService.GetAll();
+            return teste;
         }
 
         [HttpGet("{id}")]

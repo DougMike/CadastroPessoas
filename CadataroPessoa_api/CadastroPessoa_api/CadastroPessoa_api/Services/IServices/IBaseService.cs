@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace CadastroPessoa_api.Services.IServices
 {
-    public interface IBaseService<TEntity> : IDisposable where TEntity : Entity
+    public interface IBaseService<TEntity> where TEntity : Entity
     {
         IEnumerable<TEntity> GetAll();
         TEntity GetById(Guid id);

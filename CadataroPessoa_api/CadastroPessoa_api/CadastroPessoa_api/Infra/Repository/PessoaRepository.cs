@@ -4,6 +4,7 @@ using CadastroPessoa_api.Infra.IRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace CadastroPessoa_api.Infra.Repository
 {
@@ -42,9 +43,5 @@ namespace CadastroPessoa_api.Infra.Repository
             _context.SaveChangesAsync();
         }
 
-        public void Dispose()
-        {
-            _context.Dispose();
-        }
     }
 }
