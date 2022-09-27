@@ -7,6 +7,11 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ListaPessoasComponent } from './pages/lista-pessoas/lista-pessoas.component';
 import { AdicionarPessoaComponent } from './pages/adicionar-pessoa/adicionar-pessoa.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { NgxMaskModule, IConfig } from 'ngx-mask'
+
+export const options: Partial<null|IConfig> | (() => Partial<IConfig>) = null;
 
 @NgModule({
   declarations: [
@@ -18,7 +23,10 @@ import { AdicionarPessoaComponent } from './pages/adicionar-pessoa/adicionar-pes
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule,
+    NgxMaskModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]

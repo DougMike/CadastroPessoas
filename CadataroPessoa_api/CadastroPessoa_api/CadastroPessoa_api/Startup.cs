@@ -29,6 +29,7 @@ namespace CadastroPessoa_api
                 options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddScoped<IPessoaService, PessoaService>();
+
             services.AddScoped<IPessoaRepository, PessoaRepository>();
             services.AddControllers();
             services.AddCors();

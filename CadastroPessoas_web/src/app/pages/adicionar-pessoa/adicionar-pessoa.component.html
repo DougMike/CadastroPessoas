@@ -1,1 +1,66 @@
-<p>adicionar-pessoa works!</p>
+<div class="container-sm">
+    <form [formGroup]="pessoaForm" class="needs-validation" novalidate>
+        <div class="form-row">
+            <div class="col-md-12 mb-10">
+                <label for="nome">Nome: </label>
+                <input type="text" class="form-control" id="nome" placeholder="Ex.: João" formControlName="nome"
+                    required>
+                <div class="valid-feedback">
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-6 mb-3">
+                <label for="sobrenome">Sobrenome: </label>
+                <input type="text" class="form-control" id="sobrenome" placeholder="Ex.: da Silva" formControlName="sobrenome" required>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="nacionalidade">Nacionalidade: </label>
+                <input type="text" class="form-control" id="nacionalidade" placeholder="Ex.: brasileira " formControlName="nacionalidade" required>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-4 mb-4">
+                <label for="cep">CEP: </label>
+                <input type="text" mask="00000-000"class="form-control" id="cep" placeholder="Ex.: 01011-100" (change)="buscaCep()" formControlName="cep" required>
+            </div>
+            <div class="col-md-4 mb-4">
+
+                <label for="estado">Estado: </label>
+                <select class="form-control" placeholder="Selecione" id="estado" formControlName="estado" required>
+                    <option>1</option>
+                </select>
+            </div>
+            <div class="col-md-4 mb-4">
+                <label for="cidade">Cidade: </label>
+                <input type="text" class="form-control" id="cidade" placeholder="Ex.: São Paulo" formControlName="estado" required>
+            </div>
+        </div>
+        <div class="form-row">
+
+            <div class="col-md-12 mb-10">
+                <label for="logradouro">Logradouro: </label>
+                <input type="text" class="form-control" id="logradouro" placeholder="Ex.: Rua Boa vista, 253" formControlName="logradouro" required>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-6 mb-6">
+                <label for="email">E-mail: </label>
+                <input type="text" class="form-control" id="email" placeholder="Ex.: email@email.com" formControlName="email" required>
+            </div>
+            <div class="col-md-6 mb-6">
+                <label for="telefone">Telefone: </label>
+                <input type="phone" mask="(00)0000-0000" class="form-control" id="telefone" placeholder="Ex.: (11) 2020-3030" formControlName="telefone" required>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm">
+                    <button type="button" class="btn btn-danger position">Voltar</button>
+                    <button type="submit" class="btn btn-success position">Salvar</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</div>

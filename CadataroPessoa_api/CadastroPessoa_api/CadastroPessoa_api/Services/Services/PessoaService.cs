@@ -44,7 +44,5 @@ namespace CadastroPessoa_api.Services.Services
 
             validator.ValidateAndThrow(pessoa);
         }
-
-        //public void Dispose() => _pessoaRepository.Dispose();
     }
 }
