@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Pessoa } from 'src/app/models/pessoa';
 import { RequestService } from 'src/app/services/request/request.service';
-import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'app-adicionar-pessoa',
@@ -13,32 +12,39 @@ export class AdicionarPessoaComponent implements OnInit {
 
   pessoaForm: FormGroup;
 
-
-  constructor(private fb: FormBuilder, private request: RequestService) {
+  constructor(private request: RequestService) {
   }
+
   ngOnInit(): void {
-    this.createForm();
-  }
-
-  createForm() {
-    this.pessoaForm = this.fb.group({
-      nome: new FormControl('', Validators.required),
-      sobrenome: new FormControl('', Validators.required),
-      nacionalidade: new FormControl('', Validators.required),
-      cep: new FormControl('', Validators.required),
-      estado: new FormControl('', Validators.required),
-      cidade: new FormControl('', Validators.required),
-      logradouro: new FormControl('', Validators.required),
-      email: new FormControl('', Validators.required),
-      telefone: new FormControl('', Validators.required),
-
+    this.pessoaForm = new FormGroup({
+      nome: new FormControl(),
+      sobrenome: new FormControl(),
+      nacionalidade: new FormControl(),
+      cep: new FormControl(),
+      uf: new FormControl(),
+      localidade: new FormControl(),
+      logradouro: new FormControl(),
+      email: new FormControl(),
+      telefone: new FormControl(),
     })
   }
 
-  
-  async buscaCep() {
-    let teste = await this.request.buscaCep(this.pessoaForm.value.cep);
-    console.log(teste);
+
+  async buscaCep(cep: string) {
+    this.request.buscaCep(cep)
+      .subscribe(res => {
+        this.pessoaForm.patchValue({
+          cep: res.cep,
+          uf: res.uf,
+          localidade: res.localidade,
+          logradouro: res.logradouro,
+        })
+      });
+  }
+
+  onSubmit(): void {
+    const pessoa = new Pessoa();
+    this.request.addPessoa(Object.assign(pessoa, this.pessoaForm.value))
   }
 
 }

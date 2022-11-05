@@ -1,10 +1,10 @@
 <div class="container-sm">
-    <form [formGroup]="pessoaForm" class="needs-validation" novalidate>
+    <form [formGroup]="pessoaForm" (ngSubmit)="onSubmit()" class="needs-validation" novalidate>
         <div class="form-row">
             <div class="col-md-12 mb-10">
                 <label for="nome">Nome: </label>
-                <input type="text" class="form-control" id="nome" placeholder="Ex.: João" formControlName="nome"
-                    required>
+                <input type="text" class="form-control" id="nome" placeholder="Ex.: João" name="nome"
+                    formControlName="nome" required>
                 <div class="valid-feedback">
                 </div>
             </div>
@@ -12,45 +12,52 @@
         <div class="form-row">
             <div class="col-md-6 mb-3">
                 <label for="sobrenome">Sobrenome: </label>
-                <input type="text" class="form-control" id="sobrenome" placeholder="Ex.: da Silva" formControlName="sobrenome" required>
+                <input type="text" class="form-control" id="sobrenome" placeholder="Ex.: da Silva"
+                    formControlName="sobrenome" name="sobrenome" value="sobrenome" required>
             </div>
             <div class="col-md-6 mb-3">
                 <label for="nacionalidade">Nacionalidade: </label>
-                <input type="text" class="form-control" id="nacionalidade" placeholder="Ex.: brasileira " formControlName="nacionalidade" required>
+                <input type="text" class="form-control" id="nacionalidade" formControlName="nacionalidade"
+                    name="nacionalidade" placeholder="Ex.: brasileira " required>
             </div>
         </div>
         <div class="form-row">
             <div class="col-md-4 mb-4">
                 <label for="cep">CEP: </label>
-                <input type="text" mask="00000-000"class="form-control" id="cep" placeholder="Ex.: 01011-100" (change)="buscaCep()" formControlName="cep" required>
+                <input type="text" mask="00000-000" class="form-control" #cep placeholder="Ex.: 01011-100"
+                    (blur)="buscaCep(cep.value)" name="cep" required>
             </div>
-            <div class="col-md-4 mb-4">
 
+            <div class="col-md-4 mb-4">
                 <label for="estado">Estado: </label>
-                <select class="form-control" placeholder="Selecione" id="estado" formControlName="estado" required>
+                <select class="form-control" placeholder="Selecione" id="uf" formControlName="uf" name="uf" required>
                     <option>1</option>
+                    <option>SP</option>
                 </select>
             </div>
             <div class="col-md-4 mb-4">
                 <label for="cidade">Cidade: </label>
-                <input type="text" class="form-control" id="cidade" placeholder="Ex.: São Paulo" formControlName="estado" required>
+                <input type="text" class="form-control" id="localidade" placeholder="Ex.: São Paulo"
+                    formControlName="localidade" name="localidade" required>
             </div>
         </div>
         <div class="form-row">
-
             <div class="col-md-12 mb-10">
                 <label for="logradouro">Logradouro: </label>
-                <input type="text" class="form-control" id="logradouro" placeholder="Ex.: Rua Boa vista, 253" formControlName="logradouro" required>
+                <input type="text" class="form-control" formControlName="logradouro" name="logradouro" id="logradouro"
+                    placeholder="Ex.: Rua Boa vista, 253" required>
             </div>
         </div>
         <div class="form-row">
             <div class="col-md-6 mb-6">
                 <label for="email">E-mail: </label>
-                <input type="text" class="form-control" id="email" placeholder="Ex.: email@email.com" formControlName="email" required>
+                <input type="text" class="form-control" id="email" placeholder="Ex.: email@email.com"
+                    formControlName="email" name="email" required>
             </div>
             <div class="col-md-6 mb-6">
                 <label for="telefone">Telefone: </label>
-                <input type="phone" mask="(00)0000-0000" class="form-control" id="telefone" placeholder="Ex.: (11) 2020-3030" formControlName="telefone" required>
+                <input type="phone" mask="(00)0000-0000" class="form-control" id="telefone"
+                    placeholder="Ex.: (11) 2020-3030" formControlName="telefone" name="telefone" required>
             </div>
         </div>
         <div class="container">
@@ -62,5 +69,4 @@
             </div>
         </div>
     </form>
-
 </div>

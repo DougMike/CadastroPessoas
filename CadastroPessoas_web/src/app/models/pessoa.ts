@@ -3,8 +3,8 @@ export class Pessoa {
     sobrenome: string;
     nacionalidade: string;
     cep: string;
-    estado: string;
-    cidade: string;
+    uf: string;
+    localidade: string;
     logradouro: string;
     email: string;
     telefone: string;

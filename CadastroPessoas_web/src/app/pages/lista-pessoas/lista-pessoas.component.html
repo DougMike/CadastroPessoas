@@ -1,20 +1,18 @@
-<div>
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">Nome</th>
-        <th scope="col">Sobrenome</th>
-        <th scope="col">E-mail</th>
-        <th scope="col">telefone</th>
-      </tr>
-    </thead>
-    <tbody *ngFor="let item of lista">
-      <tr>
-        <th>{{item.nome}}</th>
-        <td>{{item.sobrenome}}</td>
-        <td>{{item.email}}</td>
-        <td>{{item.telefone}}</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Nome</th>
+      <th scope="col">Sobrenome</th>
+      <th scope="col">E-mail</th>
+      <th scope="col">telefone</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of listaPessoas">
+      <td>{{item.nome}}</td>
+      <td>{{item.sobrenome}}</td>
+      <td>{{item.email}}</td>
+      <td>{{item.telefone}}</td>
+    </tr>
+  </tbody>
+</table>

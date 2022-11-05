@@ -5,7 +5,9 @@
 export const environment = {
   production: false,
   apiUrl: 'https://localhost:44349/',
-  viaCep: 'https://viacep.com.br/ws/'
+  dbjson: 'http://localhost:3000/pessoas',
+  viaCep: 'https://viacep.com.br/ws/',
+
 };
 
 /*

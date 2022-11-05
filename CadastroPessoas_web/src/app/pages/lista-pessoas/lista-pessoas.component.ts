@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Pessoa } from 'src/app/models/pessoa';
+import { RequestService } from 'src/app/services/request/request.service';
 
 @Component({
   selector: 'app-lista-pessoas',
@@ -10,19 +11,19 @@ import { Pessoa } from 'src/app/models/pessoa';
 })
 export class ListaPessoasComponent implements OnInit {
 
-  lista: Pessoa[];
+  listaPessoas: Pessoa[] = [];
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private requestService: RequestService) { }
 
   ngOnInit(): void {
     this.getLista();
   }
 
   getLista() {
-    this.httpClient.get<Pessoa[]>('https://localhost:44349/Pessoas')
-      .subscribe(
-        res => this.lista = res
-      )
+    this.requestService.getList()
+      .subscribe((res) => {
+        this.listaPessoas = res;
+      });
   }
 
 }

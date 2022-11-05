@@ -1,0 +1,16 @@
+{
+  "pessoas": [
+    {
+      "nome": "Michael ",
+      "sobrenome": "Souza dos Santos",
+      "nacionalidade": "Brasileiro",
+      "cep": "04184-000",
+      "uf": "SP",
+      "localidade": "São Paulo",
+      "logradouro": "Rua Professor Arnaldo João Semeraro",
+      "email": "douglasmikemd@gmail.com",
+      "telefone": "1196437179",
+      "id": 1
+    }
+  ]
+}
