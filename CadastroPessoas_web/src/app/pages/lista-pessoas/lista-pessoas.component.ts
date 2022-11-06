@@ -21,9 +21,12 @@ export class ListaPessoasComponent implements OnInit {
 
   getLista() {
     this.requestService.getList()
-      .subscribe((res) => {
-        this.listaPessoas = res;
+      .subscribe({
+        next: (res) => this.listaPessoas = res
       });
   }
 
+  removerRegistro(id: number) {
+    this.requestService.removerPessoa(id);
+  }
 }

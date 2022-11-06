@@ -18,10 +18,10 @@ namespace CadastroPessoa_api.Data.Models
         public string CEP { get; set; }
 
         [Required]
-        public string Estado { get; set; }
+        public string Uf { get; set; }
 
         [Required]
-        public string Cidade { get; set; }
+        public string Localidade { get; set; }
 
         [Required]
         public string Logradouro { get; set; }

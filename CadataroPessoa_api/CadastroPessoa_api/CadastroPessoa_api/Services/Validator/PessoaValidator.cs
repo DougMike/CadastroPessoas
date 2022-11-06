@@ -23,11 +23,11 @@ namespace CadastroPessoa_api.Services.Validator
                             .NotEmpty().WithMessage("O campo não pode ser vazio.")
                 .NotNull().WithMessage("Por favor, preencha o campo.");
 
-            RuleFor(p => p.Estado)
+            RuleFor(p => p.Uf)
                             .NotEmpty().WithMessage("O campo não pode ser vazio.")
                 .NotNull().WithMessage("Por favor, preencha o campo.");
 
-            RuleFor(p => p.Cidade)
+            RuleFor(p => p.Localidade)
                             .NotEmpty().WithMessage("O campo não pode ser vazio.")
                 .NotNull().WithMessage("Por favor, preencha o campo.");
 

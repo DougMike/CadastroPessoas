@@ -1,19 +1,24 @@
-﻿using CadastroPessoa_api.Data.Models;
+﻿using CadastroPessoa_api.Data;
+using CadastroPessoa_api.Data.Models;
 using CadastroPessoa_api.Infra.IRepository;
 using CadastroPessoa_api.Services.IServices;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CadastroPessoa_api.Services.Services
 {
     public class PessoaService : IPessoaService
     {
         private readonly IPessoaRepository _pessoaRepository;
+        private readonly DataContext _dataContext;
 
-        public PessoaService(IPessoaRepository pessoaRepository)
+        public PessoaService(IPessoaRepository pessoaRepository,
+            DataContext dataContext)
         {
             _pessoaRepository = pessoaRepository;
+            _dataContext = dataContext;
         }
 
         public IEnumerable<Pessoa> GetAll() => _pessoaRepository.GetAll();
@@ -41,6 +46,10 @@ namespace CadastroPessoa_api.Services.Services
         {
             if (pessoa == null)
                 throw new Exception("Registros não detectados!");
+
+            Pessoa pessoaExistente = _dataContext.Pessoas.Where(p => p.Email == pessoa.Email || p.Nome == pessoa.Nome).FirstOrDefault();
+            if (pessoaExistente != null)
+                return throw new Exception("Usuário já cadastrado");
 
             validator.ValidateAndThrow(pessoa);
         }
