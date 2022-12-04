@@ -3,9 +3,11 @@ using CadastroPessoa_api.Data.Models;
 using CadastroPessoa_api.Infra.IRepository;
 using CadastroPessoa_api.Services.IServices;
 using FluentValidation;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace CadastroPessoa_api.Services.Services
 {
@@ -21,9 +23,21 @@ namespace CadastroPessoa_api.Services.Services
             _dataContext = dataContext;
         }
 
-        public IEnumerable<Pessoa> GetAll() => _pessoaRepository.GetAll();
+        public async Task<IEnumerable<Pessoa>> GetAllAsync()
+        {
+            try
+            {
+                var pessoas = await _pessoaRepository.GetAllAsync();
+                return pessoas;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
 
-        public Pessoa GetById(Guid id) => _pessoaRepository.GetById(id);
+        }
+
+        public Task<Pessoa> GetByIdAsync(Guid id) => _pessoaRepository.GetByIdAsync(id);
 
         public Pessoa Add<TValidator>(Pessoa pessoa) where TValidator : AbstractValidator<Pessoa>
         {
@@ -49,7 +63,7 @@ namespace CadastroPessoa_api.Services.Services
 
             Pessoa pessoaExistente = _dataContext.Pessoas.Where(p => p.Email == pessoa.Email || p.Nome == pessoa.Nome).FirstOrDefault();
             if (pessoaExistente != null)
-                return throw new Exception("Usuário já cadastrado");
+                throw new Exception("Usuário já cadastrado");
 
             validator.ValidateAndThrow(pessoa);
         }

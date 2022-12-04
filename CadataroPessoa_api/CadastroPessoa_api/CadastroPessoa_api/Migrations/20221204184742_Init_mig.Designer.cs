@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CadastroPessoa_api.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220925141909_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20221204184742_Init_mig")]
+    partial class Init_mig
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,15 +31,11 @@ namespace CadastroPessoa_api.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Cidade")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Estado")
+                    b.Property<string>("Localidade")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -60,6 +56,10 @@ namespace CadastroPessoa_api.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Telefone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Uf")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

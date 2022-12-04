@@ -1,6 +1,7 @@
 ﻿using CadastroPessoa_api.Data;
 using CadastroPessoa_api.Data.Models;
 using CadastroPessoa_api.Infra.IRepository;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,14 +17,22 @@ namespace CadastroPessoa_api.Infra.Repository
         {
             _context = context;
         }
-        public IEnumerable<Pessoa> GetAll()
+        public async Task<IEnumerable<Pessoa>> GetAllAsync()
         {
-            return _context.Pessoas.ToList();
+            var lista = await _context.Pessoas
+                .ToListAsync();
+            return lista;
         }
 
-        public Pessoa GetById(Guid id)
+        public async Task<Pessoa> GetByIdAsync(Guid id)
         {
-            return _context.Pessoas.FirstOrDefault(p => p.Id == id);
+            
+            var pessoa = await _context.Pessoas
+                .Where(p => p.Id == id)
+                .FirstOrDefaultAsync();
+
+            return pessoa;
+                
         }
         public void Add(Pessoa entity)
         {

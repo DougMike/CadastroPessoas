@@ -4,6 +4,7 @@ using CadastroPessoa_api.Services.Validator;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace CadastroPessoa_api.Controllers
 {
@@ -17,18 +18,38 @@ namespace CadastroPessoa_api.Controllers
         {
             _pessoaService = pessoaService;
         }
-        
+
         [HttpGet]
-        public IEnumerable<Pessoa> GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            var teste = _pessoaService.GetAll();
-            return teste;
+            try
+            {
+                var listaPessoas = await _pessoaService.GetAllAsync();
+                return Ok(listaPessoas);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpGet("{id}")]
-        public Pessoa GetById(Guid id)
+        public async Task<IActionResult> GetById(Guid id)
         {
-            return _pessoaService.GetById(id);
+            try
+            {
+                var pessoa = await _pessoaService.GetByIdAsync(id);
+                if (pessoa == null) return NotFound("Pessoa por id nao encontrado");
+
+                return Ok(pessoa);
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Erro na requisição. Error: {ex.Message}");
+
+            }
+
         }
 
         [HttpPost]
@@ -42,10 +63,10 @@ namespace CadastroPessoa_api.Controllers
         }
 
         [HttpDelete("{id}")]
-        public void RemovePessoa(Guid id)
+        public async void RemovePessoa(Guid id)
         {
-            Pessoa pessoa = _pessoaService.GetById(id);
-            
+            Pessoa pessoa = await _pessoaService.GetByIdAsync(id);
+
             _pessoaService.Delete(pessoa);
         }
         private IActionResult Execute(Func<object> func)
