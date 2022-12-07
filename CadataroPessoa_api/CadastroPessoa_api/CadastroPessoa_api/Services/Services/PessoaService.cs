@@ -47,12 +47,11 @@ namespace CadastroPessoa_api.Services.Services
             return pessoa;
         }
 
-        public Pessoa Update<TValidator>(Pessoa pessoa) where TValidator : AbstractValidator<Pessoa>
+        public async Task<Pessoa> Update(Pessoa entity)
         {
-            Validate(pessoa, Activator.CreateInstance<TValidator>());
+            //Validate(pessoa, Activator.CreateInstance<TValidator>());
 
-            _pessoaRepository.Update(pessoa);
-            return pessoa;
+            return await _pessoaRepository.Update(entity);
         }
         public void Delete(Pessoa entity) => _pessoaRepository.Delete(entity);
 
@@ -67,5 +66,6 @@ namespace CadastroPessoa_api.Services.Services
 
             validator.ValidateAndThrow(pessoa);
         }
+
     }
 }

@@ -20,19 +20,21 @@ namespace CadastroPessoa_api.Infra.Repository
         public async Task<IEnumerable<Pessoa>> GetAllAsync()
         {
             var lista = await _context.Pessoas
+                .AsNoTracking()
                 .ToListAsync();
             return lista;
         }
 
         public async Task<Pessoa> GetByIdAsync(Guid id)
         {
-            
+
             var pessoa = await _context.Pessoas
                 .Where(p => p.Id == id)
+                .AsNoTracking()
                 .FirstOrDefaultAsync();
 
             return pessoa;
-                
+
         }
         public void Add(Pessoa entity)
         {
@@ -46,10 +48,12 @@ namespace CadastroPessoa_api.Infra.Repository
             _context.SaveChangesAsync();
         }
 
-        public void Update(Pessoa entity)
+        public async Task<Pessoa> Update(Pessoa entity)
         {
             _context.Pessoas.Update(entity);
-            _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
+            return entity;
+            
         }
 
     }

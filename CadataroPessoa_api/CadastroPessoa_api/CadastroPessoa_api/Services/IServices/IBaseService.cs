@@ -12,7 +12,7 @@ namespace CadastroPessoa_api.Services.IServices
         Task<TEntity> GetByIdAsync(Guid id);
         TEntity Add<TValidator>(TEntity entity) where TValidator : AbstractValidator<TEntity>;
         void Delete(TEntity entity);
-        TEntity Update<TValidator>(TEntity entity) where TValidator : AbstractValidator<TEntity>;
+        Task<TEntity> Update(TEntity entity);
 
     }
 }

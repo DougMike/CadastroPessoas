@@ -69,6 +69,26 @@ namespace CadastroPessoa_api.Controllers
 
             _pessoaService.Delete(pessoa);
         }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(Guid id, Pessoa pessoa)
+        {
+            try
+            {
+                var pessoaValid = await _pessoaService.GetByIdAsync(id);
+                if(pessoaValid == null) return NotFound();
+
+                pessoaValid.Id= id;
+                
+                await _pessoaService.Update(pessoa);
+                return Ok(pessoa);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Erro na atualização de pessoa: {ex.Message}");
+            }
+
+        }
         private IActionResult Execute(Func<object> func)
         {
             try
