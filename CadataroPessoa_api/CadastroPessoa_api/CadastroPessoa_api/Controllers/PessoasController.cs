@@ -63,11 +63,21 @@ namespace CadastroPessoa_api.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async void RemovePessoa(Guid id)
+        public async Task<IActionResult> RemovePessoa(Guid id)
         {
-            Pessoa pessoa = await _pessoaService.GetByIdAsync(id);
+            try
+            {
+                Pessoa pessoa = await _pessoaService.GetByIdAsync(id);
+                if (pessoa == null) return NotFound();
 
-            _pessoaService.Delete(pessoa);
+                _pessoaService.Delete(pessoa);
+                return Ok("Exclusão efetuada.");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Erro na exclusão do retistros: {ex.Message}");
+            }
+
         }
 
         [HttpPut("{id}")]
@@ -76,10 +86,10 @@ namespace CadastroPessoa_api.Controllers
             try
             {
                 var pessoaValid = await _pessoaService.GetByIdAsync(id);
-                if(pessoaValid == null) return NotFound();
+                if (pessoaValid == null) return NotFound();
 
-                pessoaValid.Id= id;
-                
+                pessoaValid.Id = id;
+
                 await _pessoaService.Update(pessoa);
                 return Ok(pessoa);
             }
