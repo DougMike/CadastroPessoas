@@ -17,7 +17,7 @@ export class AdicionarPessoaComponent implements OnInit {
 
   ngOnInit(): void {
     this.pessoaForm = new FormGroup({
-      nome: new FormControl(),
+      nome: new FormControl('', Validators.nullValidator),
       sobrenome: new FormControl(),
       nacionalidade: new FormControl(),
       cep: new FormControl(),

@@ -39,11 +39,11 @@ namespace CadastroPessoa_api.Services.Services
 
         public Task<Pessoa> GetByIdAsync(Guid id) => _pessoaRepository.GetByIdAsync(id);
 
-        public Pessoa Add<TValidator>(Pessoa pessoa) where TValidator : AbstractValidator<Pessoa>
+        public async Task<Pessoa> Add<TValidator>(Pessoa pessoa) where TValidator : AbstractValidator<Pessoa>
         {
             Validate(pessoa, Activator.CreateInstance<TValidator>());
 
-            _pessoaRepository.Add(pessoa);
+            await _pessoaRepository.Add(pessoa);
             return pessoa;
         }
 

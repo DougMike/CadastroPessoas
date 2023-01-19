@@ -10,7 +10,7 @@ namespace CadastroPessoa_api.Infra.IRepository
     {
         Task<IEnumerable<TEntity>> GetAllAsync();
         Task<TEntity> GetByIdAsync(Guid id);
-        void Add(TEntity entity);
+        Task<TEntity> Add(TEntity entity);
         Task<TEntity> Update(TEntity entity);
         void Delete(TEntity entity);
     }

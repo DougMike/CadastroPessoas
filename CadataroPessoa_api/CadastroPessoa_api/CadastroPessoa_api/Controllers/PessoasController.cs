@@ -53,12 +53,21 @@ namespace CadastroPessoa_api.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddPessoa(Pessoa pessoa)
+        public async Task<IActionResult> AddPessoa(Pessoa pessoa)
         {
-            if (pessoa == null)
-                return NotFound();
+            try
+            {
+                if (pessoa == null)
+                    return NotFound();
 
-            return Execute(() => _pessoaService.Add<PessoaValidator>(pessoa));
+                await Execute(() =>  _pessoaService.Add<PessoaValidator>(pessoa));
+                return Ok("Adição Efetuada.");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Erro na adição de registro: {ex.Message}");
+
+            }
 
         }
 
@@ -99,7 +108,7 @@ namespace CadastroPessoa_api.Controllers
             }
 
         }
-        private IActionResult Execute(Func<object> func)
+        private async Task<IActionResult> Execute(Func<object> func)
         {
             try
             {

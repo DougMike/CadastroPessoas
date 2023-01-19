@@ -15,28 +15,21 @@ export class RequestService {
   constructor(private http: HttpClient) { }
 
   getList(): Observable<Pessoa[]> {
-    return this.http.get<Pessoa[]>(`${environment.apiUrl}Pessoas`);
+    return this.http.get<Pessoa[]>(`${environment.apiUrl}/Pessoas`);
   }
 
   addPessoa(pessoa: any) {
     const body = JSON.stringify(pessoa);
-    console.log(body)
-    return this.http.post(`${environment.apiUrl}Pessoas`, body)
+    return this.http.post(`${environment.apiUrl}/Pessoas`, body)
       .subscribe(
-        {
-          next: (v) => window.location.reload(),
-          error: (e) => alert(`${e.error}`),
-          complete: () => alert('Adicionado com sucesso!')
-        }
+        (r) => console.log(r)
       );
   }
 
   removerPessoa(id: number) {
-    body: { id: JSON.stringify({ id }) };
-
-    return this.http.delete(`${environment.apiUrl}Pessoas`)
+    return this.http.delete(`${environment.apiUrl}/Pessoas/${id}`)
       .subscribe({
-        next: (r) => window.location.reload(),
+        next: (r) => { console.log('Deu certo...'), window.location.reload() },
         error: (e) => alert(`${e.error}`),
         complete: () => alert('Excluído com sucesso!')
       });

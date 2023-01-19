@@ -36,10 +36,11 @@ namespace CadastroPessoa_api.Infra.Repository
             return pessoa;
 
         }
-        public void Add(Pessoa entity)
+        public async Task<Pessoa> Add(Pessoa entity)
         {
             _context.Pessoas.Add(entity);
-            _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
+            return entity;
         }
 
         public void Delete(Pessoa entity)
@@ -53,7 +54,7 @@ namespace CadastroPessoa_api.Infra.Repository
             _context.Pessoas.Update(entity);
             await _context.SaveChangesAsync();
             return entity;
-            
+
         }
 
     }
