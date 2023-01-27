@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdicionarPessoaComponent } from './pages/adicionar-pessoa/adicionar-pessoa.component';
 import { HomeComponent } from './pages/home/home.component';
-import { ListaPessoasComponent } from './pages/lista-pessoas/lista-pessoas.component';
+import { ListaPessoasComponent } from './shared/lista-pessoas/lista-pessoas.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
