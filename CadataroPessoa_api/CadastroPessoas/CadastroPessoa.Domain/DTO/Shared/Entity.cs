@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CadastroPessoa.Domain.DTO
+namespace CadastroPessoa.Domain.DTO.Entities
 {
     public class Entity
     {

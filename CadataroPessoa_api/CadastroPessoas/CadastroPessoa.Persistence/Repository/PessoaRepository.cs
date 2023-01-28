@@ -1,4 +1,4 @@
-﻿using CadastroPessoa.Domain.DTO.Models;
+﻿using CadastroPessoa.Domain.DTO;
 using CadastroPessoa.Persistence.IRepository;
 using Microsoft.EntityFrameworkCore;
 using System;

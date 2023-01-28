@@ -1,4 +1,4 @@
-﻿using CadastroPessoa.Domain.DTO;
+﻿using CadastroPessoa.Domain.DTO.Entities;
 using FluentValidation;
 using System;
 using System.Collections.Generic;

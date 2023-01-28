@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using System;
 using CadastroPessoa.Application.IServices;
 using CadastroPessoa.Application.Validators;
-using CadastroPessoa.Domain.DTO.Models;
+using CadastroPessoa.Domain.DTO;
 
 namespace CadastroPessoas.API.Controllers
 {

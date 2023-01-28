@@ -1,5 +1,5 @@
 ﻿using CadastroPessoa.Application.IServices;
-using CadastroPessoa.Domain.DTO.Models;
+using CadastroPessoa.Domain.DTO;
 using CadastroPessoa.Persistence;
 using CadastroPessoa.Persistence.IRepository;
 using FluentValidation;

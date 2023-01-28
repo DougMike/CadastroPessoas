@@ -22,6 +22,7 @@
   <ItemGroup>
     <ProjectReference Include="..\CadastroPessoa.Application\CadastroPessoa.Application.csproj" />
     <ProjectReference Include="..\CadastroPessoa.Domain\CadastroPessoa.Domain.csproj" />
+    <ProjectReference Include="..\CadastroPessoas.Identity\CadastroPessoas.Identity.csproj" />
   </ItemGroup>
 
 </Project>

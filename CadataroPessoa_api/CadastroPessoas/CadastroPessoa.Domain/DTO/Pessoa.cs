@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using CadastroPessoa.Domain.DTO.Entities;
 
-namespace CadastroPessoa.Domain.DTO.Models
+namespace CadastroPessoa.Domain.DTO
 {
-    public class Pessoa: Entity
+    public class Pessoa : Entity
     {
         [Required]
         public string Nome { get; set; }

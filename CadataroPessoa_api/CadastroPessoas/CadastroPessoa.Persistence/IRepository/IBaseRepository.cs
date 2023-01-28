@@ -1,4 +1,4 @@
-﻿using CadastroPessoa.Domain.DTO;
+﻿using CadastroPessoa.Domain.DTO.Entities;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;

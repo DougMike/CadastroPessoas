@@ -1,4 +1,4 @@
-﻿using CadastroPessoa.Domain.DTO.Models;
+﻿using CadastroPessoa.Domain.DTO;
 using Microsoft.EntityFrameworkCore;
 
 namespace CadastroPessoa.Persistence

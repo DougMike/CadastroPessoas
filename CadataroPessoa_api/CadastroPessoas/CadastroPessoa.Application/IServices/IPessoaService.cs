@@ -1,5 +1,5 @@
 ﻿
-using CadastroPessoa.Domain.DTO.Models;
+using CadastroPessoa.Domain.DTO;
 
 namespace CadastroPessoa.Application.IServices
 {

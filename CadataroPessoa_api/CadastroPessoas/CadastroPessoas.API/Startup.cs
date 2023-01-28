@@ -3,6 +3,7 @@ using CadastroPessoa.Application.Services;
 using CadastroPessoa.Persistence;
 using CadastroPessoa.Persistence.IRepository;
 using CadastroPessoa.Persistence.Repository;
+using CadastroPessoas.Identity.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -26,6 +27,9 @@ namespace CadastroPessoas.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<CadastroPessoaContext>(
+                options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            
+            services.AddDbContext<IdentityDataContext>(
                 options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddScoped<IPessoaService, PessoaService>();
