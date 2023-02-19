@@ -28,7 +28,7 @@ namespace CadastroPessoas.API
         {
             services.AddDbContext<CadastroPessoaContext>(
                 options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            
+
             services.AddDbContext<IdentityDataContext>(
                 options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
@@ -57,6 +57,9 @@ namespace CadastroPessoas.API
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseCors(c => c.AllowAnyMethod()
+            .AllowAnyHeader()
+            .AllowAnyOrigin());
 
             app.UseEndpoints(endpoints =>
             {

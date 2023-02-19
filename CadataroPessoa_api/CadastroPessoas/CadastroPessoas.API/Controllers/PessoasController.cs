@@ -38,9 +38,9 @@ namespace CadastroPessoas.API.Controllers
             try
             {
                 var pessoa = await _pessoaService.GetByIdAsync(id);
-                if (pessoa == null) return NotFound("Pessoa por id nao encontrado");
+                if (pessoa == null) return NotFound();
 
-                return Ok(pessoa);
+                return Ok();
 
             }
             catch (Exception ex)
@@ -60,11 +60,11 @@ namespace CadastroPessoas.API.Controllers
                     return NotFound();
 
                 object value = await Execute(() => _pessoaService.Add<PessoaValidator>(pessoa));
-                return Ok("Adição Efetuada.");
+                return Ok(value);
             }
             catch (Exception ex)
             {
-                return BadRequest($"Erro na adição de registro: {ex.Message}");
+                return BadRequest();
 
             }
 
@@ -79,7 +79,7 @@ namespace CadastroPessoas.API.Controllers
                 if (pessoa == null) return NotFound();
 
                 _pessoaService.Delete(pessoa);
-                return Ok("Exclusão efetuada.");
+                return Ok();
             }
             catch (Exception ex)
             {

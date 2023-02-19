@@ -3,9 +3,14 @@
         <div class="form-row">
             <div class="col-md-12 mb-10">
                 <label for="nome">Nome: </label>
-                <input type="text" class="form-control" id="nome" placeholder="Ex.: João" name="nome"
-                    formControlName="nome" required>
-                <div class="valid-feedback">
+                <input type="text" class="form-control " id="nome" placeholder="Ex.: João" name="nome"
+                    formControlName="nome"
+                    [ngClass]="{'is-invalid': f['nome'].touched && f['nome'].errors?.['minlength'] || f['nome'].errors?.['maxlength']}">
+                <div class="invalid-feedback" *ngIf="f['nome'].touched && f['nome'].errors?.['minlength']">
+                    Campo deve ter tamanho mínimo de 4 caracteres
+                </div>
+                <div class="invalid-feedback" *ngIf="f['nome'].touched && f['nome'].errors?.['maxlength']">
+                    Campo deve ter tamanho máximo de 50 caracteres
                 </div>
             </div>
         </div>
@@ -13,56 +18,86 @@
             <div class="col-md-6 mb-3">
                 <label for="sobrenome">Sobrenome: </label>
                 <input type="text" class="form-control" id="sobrenome" placeholder="Ex.: da Silva"
-                    formControlName="sobrenome" name="sobrenome" value="sobrenome" required>
+                    formControlName="sobrenome" name="sobrenome" value="sobrenome"
+                    [ngClass]="{'is-invalid': f['sobrenome'].touched && f['sobrenome'].errors?.['required']}">
+                <div class="invalid-feedback" *ngIf="f['sobrenome'].touched && f['sobrenome'].errors?.['required']">
+                    Campo requerido
+                </div>
             </div>
             <div class="col-md-6 mb-3">
                 <label for="nacionalidade">Nacionalidade: </label>
                 <input type="text" class="form-control" id="nacionalidade" formControlName="nacionalidade"
-                    name="nacionalidade" placeholder="Ex.: brasileira " required>
+                    name="nacionalidade" placeholder="Ex.: brasileira"
+                    [ngClass]="{'is-invalid': f['nacionalidade'].touched && f['nacionalidade'].errors?.['required']}">
             </div>
         </div>
         <div class="form-row">
             <div class="col-md-4 mb-4">
                 <label for="cep">CEP: </label>
                 <input type="text" mask="00000-000" class="form-control" #cep placeholder="Ex.: 01011-100"
-                    (blur)="buscaCep(cep.value)" name="cep" required>
+                    (blur)="buscaCep(cep.value)" name="cep"
+                    [ngClass]="{'is-invalid': f['cep'].touched && f['cep'].errors?.['required']}">
+                <div class="invalid-feedback" *ngIf="f['cep'].touched && f['cep'].errors?.['required']">
+                    Campo requerido
+                </div>
             </div>
 
             <div class="col-md-4 mb-4">
                 <label for="estado">Estado: </label>
-                <select class="form-control" placeholder="Selecione" id="uf" formControlName="uf" name="uf" required>
+                <select class="form-control" placeholder="Selecione" id="uf" formControlName="uf" name="uf"
+                    [ngClass]="{'is-invalid': f['uf'].touched && f['uf'].errors?.['required']}">
                     <option>1</option>
                     <option>SP</option>
                 </select>
+                <div class="invalid-feedback" *ngIf="f['uf'].touched && f['uf'].errors?.['required']">
+                    Campo requerido
+                </div>
             </div>
             <div class="col-md-4 mb-4">
                 <label for="cidade">Cidade: </label>
                 <input type="text" class="form-control" id="localidade" placeholder="Ex.: São Paulo"
-                    formControlName="localidade" name="localidade" required>
+                    formControlName="localidade" name="localidade"
+                    [ngClass]="{'is-invalid': f['localidade'].touched && f['localidade'].errors?.['required']}">
+                <div class="invalid-feedback" *ngIf="f['localidade'].touched && f['localidade'].errors?.['required']">
+                    Campo requerido
+                </div>
             </div>
         </div>
         <div class="form-row">
             <div class="col-md-12 mb-10">
                 <label for="logradouro">Logradouro: </label>
                 <input type="text" class="form-control" formControlName="logradouro" name="logradouro" id="logradouro"
-                    placeholder="Ex.: Rua Boa vista, 253" required>
+                    placeholder="Ex.: Rua Boa vista, 253"
+                    [ngClass]="{'is-invalid': f['logradouro'].touched && f['logradouro'].errors?.['required']}">
+                <div class="invalid-feedback" *ngIf="f['logradouro'].touched && f['logradouro'].errors?.['required']">
+                    Campo requerido
+                </div>
             </div>
         </div>
         <div class="form-row">
             <div class="col-md-6 mb-6">
                 <label for="email">E-mail: </label>
                 <input type="text" class="form-control" id="email" placeholder="Ex.: email@email.com"
-                    formControlName="email" name="email" required>
+                    formControlName="email" name="email"
+                    [ngClass]="{'is-invalid': f['email'].touched && f['email'].errors?.['email']}">
+                <div class="invalid-feedback" *ngIf="f['email'].touched && f['email'].errors?.['email']">
+                    Campo requerido
+                </div>
             </div>
             <div class="col-md-6 mb-6">
                 <label for="telefone">Telefone: </label>
-                <input type="phone" mask="(00)0000-0000" class="form-control" id="telefone"
-                    placeholder="Ex.: (11) 2020-3030" formControlName="telefone" name="telefone" required>
+                <input type="phone" mask="(00)00000-0000" class="form-control" id="telefone"
+                    placeholder="Ex.: (11) 2020-3030" formControlName="telefone" name="telefone"
+                    [ngClass]="{'is-invalid': f['telefone'].touched && f['telefone'].errors?.['required']}">
+                <div class="invalid-feedback" *ngIf="f['telefone'].touched && f['telefone'].errors?.['required']">
+                    Campo requerido
+                </div>
             </div>
         </div>
+        {{pessoaForm.valid | json}}
         <div class="container d-grid gap-2 d-md-flex justify-content-md-end">
-            <button type="button" class="btn btn-danger position">Voltar</button>
-            <button type="submit" class="btn btn-success position">Salvar</button>
+            <button type="button" class="btn btn-danger position" >Voltar</button>
+            <button type="submit" class="btn btn-success position" [disabled]="!pessoaForm.valid">Salvar</button>
         </div>
     </form>
 </div>

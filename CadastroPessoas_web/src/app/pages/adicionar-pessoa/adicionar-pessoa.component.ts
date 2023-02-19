@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Pessoa } from 'src/app/models/pessoa';
 import { RequestService } from 'src/app/services/request/request.service';
 
@@ -11,34 +11,42 @@ import { RequestService } from 'src/app/services/request/request.service';
 export class AdicionarPessoaComponent implements OnInit {
 
   pessoaForm: FormGroup;
+  get f() { return this.pessoaForm.controls }
 
-  constructor(private request: RequestService) {
+  constructor(private request: RequestService,
+    private fb: FormBuilder) {
   }
 
   ngOnInit(): void {
-    this.pessoaForm = new FormGroup({
-      nome: new FormControl('', Validators.nullValidator),
-      sobrenome: new FormControl(),
-      nacionalidade: new FormControl(),
-      cep: new FormControl(),
-      uf: new FormControl(),
-      localidade: new FormControl(),
-      logradouro: new FormControl(),
-      email: new FormControl(),
-      telefone: new FormControl(),
+    this.initForm();
+  }
+
+  initForm() {
+    this.pessoaForm = this.fb.group({
+      nome: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(50)]],
+      sobrenome: ['', Validators.required],
+      nacionalidade: ['', Validators.required],
+      cep: ['', Validators.required],
+      uf: ['', Validators.required],
+      localidade: ['', Validators.required],
+      logradouro: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      telefone: ['', Validators.required],
     })
   }
 
-
   async buscaCep(cep: string) {
     this.request.buscaCep(cep)
-      .subscribe(res => {
-        this.pessoaForm.patchValue({
-          cep: res.cep,
-          uf: res.uf,
-          localidade: res.localidade,
-          logradouro: res.logradouro,
-        })
+      .subscribe({
+        next: res => {
+          this.pessoaForm.patchValue({
+            cep: res.cep,
+            uf: res.uf,
+            localidade: res.localidade,
+            logradouro: res.logradouro,
+          })
+        },
+        error: e => alert(e)
       });
   }
 
