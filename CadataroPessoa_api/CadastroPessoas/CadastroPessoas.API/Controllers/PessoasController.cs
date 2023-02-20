@@ -4,6 +4,7 @@ using System;
 using CadastroPessoa.Application.IServices;
 using CadastroPessoa.Application.Validators;
 using CadastroPessoa.Domain.DTO;
+using Newtonsoft.Json;
 
 namespace CadastroPessoas.API.Controllers
 {
@@ -38,7 +39,7 @@ namespace CadastroPessoas.API.Controllers
             try
             {
                 var pessoa = await _pessoaService.GetByIdAsync(id);
-                if (pessoa == null) return NotFound();
+                if (pessoa == null) return NotFound("Não encontrado.");
 
                 return Ok();
 
@@ -52,19 +53,18 @@ namespace CadastroPessoas.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddPessoa(Pessoa pessoa)
+        public async Task<IActionResult> AddPessoa([FromBody] Pessoa model)
         {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
             try
             {
-                if (pessoa == null)
-                    return NotFound();
-
-                object value = await Execute(() => _pessoaService.Add<PessoaValidator>(pessoa));
+                object value = await _pessoaService.Add<PessoaValidator>(model);
                 return Ok(value);
             }
             catch (Exception ex)
             {
-                return BadRequest();
+                return BadRequest(ex.Message);
 
             }
 
@@ -73,10 +73,11 @@ namespace CadastroPessoas.API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> RemovePessoa(Guid id)
         {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
             try
             {
                 var pessoa = await _pessoaService.GetByIdAsync(id);
-                if (pessoa == null) return NotFound();
+                if (pessoa == null) return NotFound("Registro não encontrado!");
 
                 _pessoaService.Delete(pessoa);
                 return Ok();
@@ -106,19 +107,6 @@ namespace CadastroPessoas.API.Controllers
                 return BadRequest($"Erro na atualização de pessoa: {ex.Message}");
             }
 
-        }
-        private async Task<IActionResult> Execute(Func<object> func)
-        {
-            try
-            {
-                var result = func();
-
-                return Ok(result);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
         }
     }
 }

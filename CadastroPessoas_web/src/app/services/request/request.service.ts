@@ -24,8 +24,8 @@ export class RequestService {
 
     return this.http.post<any>(`${environment.apiUrl}/Pessoas`, pessoa)
       .subscribe({
-        next: (r) => { console.log('Ok: ', r), this.router.navigate(['']) },
-        error: (e) => { console.log('Erro: ', e.error) }
+        next: (r) => { console.log(r), this.router.navigate(['']) },
+        error: (e) => { alert(e.error) }
       });
 
   }
@@ -33,7 +33,7 @@ export class RequestService {
   removerPessoa(id: number) {
     return this.http.delete(`${environment.apiUrl}/Pessoas/${id}`)
       .subscribe({
-        next: (r) => { console.log('Ok: ', r), this.router.navigate(['']) },
+        next: (r) => this.getList() ,
         error: (e) => { console.log('Erro: ', e) }
       });
   }
