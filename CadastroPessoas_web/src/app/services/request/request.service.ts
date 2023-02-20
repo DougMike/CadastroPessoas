@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { map, Observable } from 'rxjs';
 import { options } from 'src/app/app.module';
 import { Pessoa } from 'src/app/models/pessoa';
@@ -12,26 +13,28 @@ export class RequestService {
 
   pessoas: Pessoa[];
   endereco: any;
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+    private router: Router) { }
 
   getList(): Observable<Pessoa[]> {
     return this.http.get<Pessoa[]>(`${environment.apiUrl}/Pessoas`);
   }
 
   addPessoa(pessoa: any) {
-    const body = JSON.stringify(pessoa);
-    return this.http.post(`${environment.apiUrl}/Pessoas`, body)
-      .subscribe(
-        (r) => console.log(r)
-      );
+
+    return this.http.post<any>(`${environment.apiUrl}/Pessoas`, pessoa)
+      .subscribe({
+        next: (r) => { console.log('Ok: ', r), this.router.navigate(['']) },
+        error: (e) => { console.log('Erro: ', e.error) }
+      });
+
   }
 
   removerPessoa(id: number) {
     return this.http.delete(`${environment.apiUrl}/Pessoas/${id}`)
       .subscribe({
-        next: (r) => { console.log('Deu certo...'), window.location.reload() },
-        error: (e) => alert(`${e.error}`),
-        complete: () => alert('Excluído com sucesso!')
+        next: (r) => { console.log('Ok: ', r), this.router.navigate(['']) },
+        error: (e) => { console.log('Erro: ', e) }
       });
   }
 
