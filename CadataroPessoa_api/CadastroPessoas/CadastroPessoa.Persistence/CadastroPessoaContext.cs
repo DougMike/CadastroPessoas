@@ -14,5 +14,6 @@ namespace CadastroPessoa.Persistence
         }
 
         public DbSet<Pessoa> Pessoas { get; set; }
+        public DbSet<File> Files { get; set; }
     }
 }

@@ -1,5 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
+﻿using CadastroPessoa.Application.IServices;
+using CadastroPessoa.Application.Validators;
+using CadastroPessoa.Domain.DTO;
+using CadastroPessoa.Persistence.IRepository;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -9,36 +14,97 @@ namespace CadastroPessoas.API.Controllers
     [ApiController]
     public class FileController : ControllerBase
     {
+        private readonly IFileService _fileService;
+        public FileController(IFileService fileService)
+        {
+            _fileService =fileService;
+
+        }
+
         // GET: api/<FileController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<IActionResult> GetAll()
         {
-            return new string[] { "value1", "value2" };
+            try
+            {
+                return Ok(await _fileService.GetAllAsync());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // GET api/<FileController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<IActionResult> GetById(Guid id)
         {
-            return "value";
+            try
+            {
+                var file = await _fileService.GetByIdAsync(id);
+                if (file == null) return NotFound("Arquivo não encontrado.");
+
+                return Ok(file);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // POST api/<FileController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> Post([FromBody] File model)
         {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+            try
+            {
+                object value = await _fileService.Add<FileValidator>(model);
+                if (value == null) return BadRequest();
+
+                return Ok(value);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
         }
 
         // PUT api/<FileController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<IActionResult> Put(int id, [FromBody] File model)
         {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+            try
+            {
+                object value = await _fileService.Update(model);
+                return Ok(value);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // DELETE api/<FileController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(Guid id)
         {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+            try
+            {
+                var file = await _fileService.GetByIdAsync(id);
+                if (file == null) return BadRequest("Resgistro não encontrado.");
+
+
+                _fileService.Delete(file);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

@@ -4,7 +4,6 @@ using System;
 using CadastroPessoa.Application.IServices;
 using CadastroPessoa.Application.Validators;
 using CadastroPessoa.Domain.DTO;
-using Newtonsoft.Json;
 
 namespace CadastroPessoas.API.Controllers
 {
@@ -77,7 +76,7 @@ namespace CadastroPessoas.API.Controllers
             try
             {
                 var pessoa = await _pessoaService.GetByIdAsync(id);
-                if (pessoa == null) return NotFound("Registro não encontrado!");
+                if (pessoa == null) return NotFound("Registro não encontrado.");
 
                 _pessoaService.Delete(pessoa);
                 return Ok();
@@ -95,7 +94,7 @@ namespace CadastroPessoas.API.Controllers
             try
             {
                 var pessoaValid = await _pessoaService.GetByIdAsync(id);
-                if (pessoaValid == null) return NotFound();
+                if (pessoaValid == null) return NotFound("Registro não encontrado.");
 
                 pessoaValid.Id = id;
 

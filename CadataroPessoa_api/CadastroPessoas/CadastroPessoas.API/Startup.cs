@@ -11,7 +11,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using System.Text.Json.Serialization;
 
 namespace CadastroPessoas.API
 {
@@ -35,6 +34,8 @@ namespace CadastroPessoas.API
 
             services.AddScoped<IPessoaService, PessoaService>();
             services.AddScoped<IPessoaRepository, PessoaRepository>();
+            services.AddScoped<IFileService, FileService>();
+            services.AddScoped<IFileRepository, FileRepository>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

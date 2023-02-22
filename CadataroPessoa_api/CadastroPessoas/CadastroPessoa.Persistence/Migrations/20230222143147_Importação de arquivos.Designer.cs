@@ -4,14 +4,16 @@ using CadastroPessoa.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CadastroPessoa.Persistence.Migrations
 {
     [DbContext(typeof(CadastroPessoaContext))]
-    partial class CadastroPessoaContextModelSnapshot : ModelSnapshot
+    [Migration("20230222143147_Importação de arquivos")]
+    partial class Importaçãodearquivos
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
