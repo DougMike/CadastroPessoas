@@ -16,8 +16,20 @@ export class RequestService {
   constructor(private http: HttpClient,
     private router: Router) { }
 
-  getList(): Observable<Pessoa[]> {
+  getPessoasList(): Observable<Pessoa[]> {
     return this.http.get<Pessoa[]>(`${environment.apiUrl}/Pessoas`);
+  }
+
+  getFileList() {
+    return this.http.get<File[]>(`${environment.apiUrl}/api/File`);
+  }
+
+  postFile(file: File) {
+    return this.http.post<File>(`${environment.apiUrl}/api/File`, file)
+      .subscribe({
+        next: (f) => console.log(f),
+        error: (e) => console.log(e)
+      })
   }
 
   addPessoa(pessoa: any) {
@@ -30,11 +42,11 @@ export class RequestService {
 
   }
 
-  removerPessoa(id: number) {
+  removerPessoa(id: any) {
     return this.http.delete(`${environment.apiUrl}/Pessoas/${id}`)
       .subscribe({
-        next: (r) => this.getList() ,
-        error: (e) => { console.log('Erro: ', e) }
+        next: (r) => window.location.reload(),
+        error: (e) => { console.log('Erro: ', e.error) }
       });
   }
 

@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
   constructor(private requestService: RequestService) { }
 
   ngOnInit(): void {
-    this.requestService.getList();
+    this.requestService.getPessoasList();
   }
 
   showLista(){

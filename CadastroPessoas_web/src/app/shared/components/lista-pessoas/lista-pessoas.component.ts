@@ -20,7 +20,7 @@ export class ListaPessoasComponent implements OnInit {
   }
 
   getLista() {
-    this.requestService.getList()
+    this.requestService.getPessoasList()
       .subscribe({
         next: (res) => this.listaPessoas = res
       });
