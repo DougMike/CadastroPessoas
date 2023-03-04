@@ -1,4 +1,4 @@
-﻿using CadastroPessoa.Domain.DTO;
+﻿using CadastroPessoa.Domain.Entities;
 
 namespace CadastroPessoa.Persistence.IRepository
 {

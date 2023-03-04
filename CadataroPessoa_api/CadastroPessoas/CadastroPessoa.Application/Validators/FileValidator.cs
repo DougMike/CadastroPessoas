@@ -1,9 +1,9 @@
-﻿using CadastroPessoa.Domain.DTO;
+﻿using CadastroPessoa.Domain.Entities;
 using FluentValidation;
 
 namespace CadastroPessoa.Application.Validators
 {
-    public class FileValidator : AbstractValidator<File>
+    public class FileValidator : AbstractValidator<FileImport>
     {
         public FileValidator()
         {

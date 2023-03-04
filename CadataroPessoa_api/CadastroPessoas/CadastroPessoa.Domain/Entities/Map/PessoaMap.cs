@@ -1,9 +1,7 @@
-﻿
-using CadastroPessoa.Domain.DTO;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace CadastroPessoa.Domain.Mappings
+namespace CadastroPessoa.Domain.Entities.Map
 {
     public class PessoaMap : IEntityTypeConfiguration<Pessoa>
     {
@@ -14,7 +12,7 @@ namespace CadastroPessoa.Domain.Mappings
             builder.Property(p => p.Nome)
                 .HasColumnType("varchar(100)")
                 .IsRequired();
-            
+
             builder.Property(p => p.Sobrenome)
                 .HasColumnType("varchar(100)")
                 .IsRequired();

@@ -1,12 +1,11 @@
-﻿using CadastroPessoa.Domain.DTO;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace CadastroPessoa.Domain.Mappings
+namespace CadastroPessoa.Domain.Entities.Map
 {
-    public class FileMap : IEntityTypeConfiguration<File>
+    public class FileMap : IEntityTypeConfiguration<FileImport>
     {
-        public void Configure(EntityTypeBuilder<File> builder)
+        public void Configure(EntityTypeBuilder<FileImport> builder)
         {
             builder.ToTable("Arquivos");
 

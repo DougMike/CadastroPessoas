@@ -1,5 +1,5 @@
-﻿using CadastroPessoa.Domain.DTO;
-using CadastroPessoa.Domain.Mappings;
+﻿using CadastroPessoa.Domain.Entities;
+using CadastroPessoa.Domain.Entities.Map;
 using Microsoft.EntityFrameworkCore;
 
 namespace CadastroPessoa.Persistence
@@ -14,6 +14,6 @@ namespace CadastroPessoa.Persistence
         }
 
         public DbSet<Pessoa> Pessoas { get; set; }
-        public DbSet<File> Files { get; set; }
+        public DbSet<FileImport> Files { get; set; }
     }
 }

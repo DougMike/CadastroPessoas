@@ -5,6 +5,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="DTO\Request\**" />
+    <Compile Remove="DTO\Response\**" />
+    <EmbeddedResource Remove="DTO\Request\**" />
+    <EmbeddedResource Remove="DTO\Response\**" />
+    <None Remove="DTO\Request\**" />
+    <None Remove="DTO\Response\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
     <PackageReference Include="FluentValidation" Version="11.4.0" />
   </ItemGroup>
 

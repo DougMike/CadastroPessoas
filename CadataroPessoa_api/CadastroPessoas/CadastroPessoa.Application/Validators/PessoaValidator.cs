@@ -1,9 +1,10 @@
-﻿using CadastroPessoa.Domain.DTO;
+﻿using CadastroPessoa.Application.DTO;
+using CadastroPessoa.Domain.Entities;
 using FluentValidation;
 
 namespace CadastroPessoa.Application.Validators
 {
-    public class PessoaValidator : AbstractValidator<Pessoa>
+    public class PessoaValidator : AbstractValidator<PessoaDTO>
     {
         public PessoaValidator()
         {

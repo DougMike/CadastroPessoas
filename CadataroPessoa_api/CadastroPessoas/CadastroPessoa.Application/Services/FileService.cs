@@ -1,5 +1,5 @@
 ﻿using CadastroPessoa.Application.IServices;
-using CadastroPessoa.Domain.DTO;
+using CadastroPessoa.Domain.Entities;
 using CadastroPessoa.Persistence;
 using CadastroPessoa.Persistence.IRepository;
 using FluentValidation;
@@ -21,10 +21,10 @@ namespace CadastroPessoa.Application.Services
             _fileRepository = fileRepository;
         }
 
-        public Task<IEnumerable<File>> GetAllAsync() => _fileRepository.GetAllAsync();
-        public Task<File> GetByIdAsync(Guid id) => _fileRepository.GetByIdAsync(id);
+        public Task<IEnumerable<FileImport>> GetAllAsync() => _fileRepository.GetAllAsync();
+        public Task<FileImport> GetByIdAsync(Guid id) => _fileRepository.GetByIdAsync(id);
 
-        public async Task<File> Add<TValidator>(File entity) where TValidator : AbstractValidator<File>
+        public async Task<FileImport> Add<TValidator>(FileImport entity) where TValidator : AbstractValidator<FileImport>
         {
             Validate(entity, Activator.CreateInstance<TValidator>());
 
@@ -33,19 +33,19 @@ namespace CadastroPessoa.Application.Services
 
         }
 
-        public void Delete(File entity) => _fileRepository.Delete(entity);
+        public void Delete(FileImport entity) => _fileRepository.Delete(entity);
 
-        public async Task<File> Update(File entity)
+        public async Task<FileImport> Update(FileImport entity)
         {
             return await _fileRepository.Update(entity);
         }
 
-        private void Validate(File file, AbstractValidator<File> validator)
+        private void Validate(FileImport file, AbstractValidator<FileImport> validator)
         {
             if (file == null)
                 throw new Exception("Registros não detectados!");
 
-            File fileExistente = _context.Files.Where(f => f.Name == file.Name && f.Type == file.Type).FirstOrDefault();
+            FileImport fileExistente = _context.Files.Where(f => f.Name == file.Name && f.Type == file.Type).FirstOrDefault();
             if (fileExistente!= null)
                 throw new Exception("Arquivo já cadastrado");
 

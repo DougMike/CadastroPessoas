@@ -1,4 +1,4 @@
-﻿using CadastroPessoa.Domain.DTO;
+﻿using CadastroPessoa.Domain.Entities;
 using CadastroPessoa.Persistence.IRepository;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -15,7 +15,7 @@ namespace CadastroPessoa.Persistence.Repository
         {
             _context = context;
         }
-        public async Task<IEnumerable<File>> GetAllAsync()
+        public async Task<IEnumerable<FileImport>> GetAllAsync()
         {
             var files = await _context.Files
                 .AsNoTracking()
@@ -24,7 +24,7 @@ namespace CadastroPessoa.Persistence.Repository
             return files;
         }
 
-        public async Task<File> GetByIdAsync(Guid id)
+        public async Task<FileImport> GetByIdAsync(Guid id)
         {
             var file = await _context.Files
                 .Where(f => f.Id == id)
@@ -33,25 +33,23 @@ namespace CadastroPessoa.Persistence.Repository
 
             return file;
         }
-        public async Task<File> Add(File entity)
+        public async Task<FileImport> Add(FileImport entity)
         {
             _context.Add(entity);
             await _context.SaveChangesAsync();
             return entity;
         }
-        public async Task<File> Update(File entity)
+        public async Task<FileImport> Update(FileImport entity)
         {
             _context.Files.Update(entity);
             await _context.SaveChangesAsync();
             return entity;
 
         }
-        public void Delete(File entity)
+        public void Delete(FileImport entity)
         {
             _context.Files.Remove(entity);
             _context.SaveChangesAsync();
         }
-
-
     }
 }

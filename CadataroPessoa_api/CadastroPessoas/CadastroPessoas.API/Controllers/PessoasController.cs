@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using System;
 using CadastroPessoa.Application.IServices;
 using CadastroPessoa.Application.Validators;
-using CadastroPessoa.Domain.DTO;
+using CadastroPessoa.Application.DTO;
 
 namespace CadastroPessoas.API.Controllers
 {
@@ -52,7 +52,7 @@ namespace CadastroPessoas.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddPessoa([FromBody] Pessoa model)
+        public async Task<IActionResult> AddPessoa([FromBody] PessoaDTO model)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
@@ -89,7 +89,7 @@ namespace CadastroPessoas.API.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(Guid id, Pessoa pessoa)
+        public async Task<IActionResult> Update(Guid id, PessoaDTO pessoa)
         {
             try
             {

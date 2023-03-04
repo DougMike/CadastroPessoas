@@ -1,8 +1,7 @@
-﻿using CadastroPessoa.Domain.DTO.Entities;
-
-namespace CadastroPessoa.Domain.DTO
+﻿
+namespace CadastroPessoa.Domain.Entities
 {
-    public class File: Entity
+    public class FileImport : Entity
     {
         public string Name { get; set; }
         public string Type { get; set; }

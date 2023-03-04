@@ -1,4 +1,4 @@
-﻿using CadastroPessoa.Domain.DTO.Entities;
+﻿using CadastroPessoa.Domain.Entities;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CadastroPessoa.Application.IServices
 {
-    public interface IBaseService<TEntity> where TEntity : Entity
+    public interface IBaseService<TEntity>
     {
         Task<IEnumerable<TEntity>> GetAllAsync();
         Task<TEntity> GetByIdAsync(Guid id);

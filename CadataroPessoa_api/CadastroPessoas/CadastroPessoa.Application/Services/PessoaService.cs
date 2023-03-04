@@ -1,5 +1,7 @@
-﻿using CadastroPessoa.Application.IServices;
-using CadastroPessoa.Domain.DTO;
+﻿using AutoMapper;
+using CadastroPessoa.Application.DTO;
+using CadastroPessoa.Application.IServices;
+using CadastroPessoa.Domain.Entities;
 using CadastroPessoa.Persistence;
 using CadastroPessoa.Persistence.IRepository;
 using FluentValidation;
@@ -14,18 +16,23 @@ namespace CadastroPessoa.Application.Services
     {
         private readonly IPessoaRepository _pessoaRepository;
         private readonly CadastroPessoaContext _context;
+        private readonly IMapper _mapper;
 
         public PessoaService(IPessoaRepository pessoaRepository,
-            CadastroPessoaContext context)
+            CadastroPessoaContext context,
+            IMapper mapper)
         {
             _pessoaRepository = pessoaRepository;
             _context = context;
+            _mapper = mapper;
         }
-        public async Task<IEnumerable<Pessoa>> GetAllAsync()
+        public async Task<IEnumerable<PessoaDTO>> GetAllAsync()
         {
+
             try
             {
-                var pessoas = await _pessoaRepository.GetAllAsync();
+                var pessoas = _mapper.Map<IEnumerable<PessoaDTO>>(await _pessoaRepository.GetAllAsync());
+
                 return pessoas;
             }
             catch (Exception ex)
@@ -35,25 +42,31 @@ namespace CadastroPessoa.Application.Services
 
         }
 
-        public Task<Pessoa> GetByIdAsync(Guid id) => _pessoaRepository.GetByIdAsync(id);
+        public async Task<PessoaDTO> GetByIdAsync(Guid id)
+        {
+            return _mapper.Map<PessoaDTO>(await _pessoaRepository.GetByIdAsync(id));
+        }
 
-        public async Task<Pessoa> Add<TValidator>(Pessoa pessoa) where TValidator : AbstractValidator<Pessoa>
+        public async Task<PessoaDTO> Add<TValidator>(PessoaDTO pessoa) where TValidator : AbstractValidator<PessoaDTO>
         {
             Validate(pessoa, Activator.CreateInstance<TValidator>());
 
-            await _pessoaRepository.Add(pessoa);
+            await _pessoaRepository.Add(_mapper.Map<Pessoa>(pessoa));
             return pessoa;
         }
 
-        public async Task<Pessoa> Update(Pessoa entity)
+        public async Task<PessoaDTO> Update(PessoaDTO entity)
         {
-            //Validate(pessoa, Activator.CreateInstance<TValidator>());
-
-            return await _pessoaRepository.Update(entity);
+            var pessoa = _mapper.Map<Pessoa>(entity);
+            return _mapper.Map<PessoaDTO>(await _pessoaRepository.Update(pessoa));
         }
-        public void Delete(Pessoa entity) => _pessoaRepository.Delete(entity);
+        public void Delete(PessoaDTO entity)
+        {
+            var pessoa = _mapper.Map<Pessoa>(entity);
+            _pessoaRepository.Delete(pessoa);
+        }
 
-        private void Validate(Pessoa pessoa, AbstractValidator<Pessoa> validator)
+        private void Validate(PessoaDTO pessoa, AbstractValidator<PessoaDTO> validator)
         {
             if (pessoa == null)
                 throw new Exception("Registros não detectados!");
