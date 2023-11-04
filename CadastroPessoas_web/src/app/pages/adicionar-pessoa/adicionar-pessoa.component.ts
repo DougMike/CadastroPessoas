@@ -51,7 +51,7 @@ export class AdicionarPessoaComponent implements OnInit {
   }
 
   onSubmit(): void {
-    const pessoa = new Pessoa();
+    const pessoa = new Pessoa()
     this.request.addPessoa(Object.assign(pessoa, this.pessoaForm.value))
   }
 
